@@ -1,0 +1,116 @@
+docker@minikube:~$ ^C
+docker@minikube:~$ exit
+logout
+ssh: Process exited with status 130
+ubuntu@ip-172-31-0-126:~$ kubectl get pods
+NAME    READY   STATUS    RESTARTS        AGE
+nginx   1/1     Running   2 (3m22s ago)   60m
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx 
+pod "nginx" deleted
+ubuntu@ip-172-31-0-126:~$ minikube ssh
+docker@minikube:~$ curl 10.244.0.7
+curl: (7) Failed to connect to 10.244.0.7 port 80 after 14325 ms: No route to host
+docker@minikube:~$ vim deployment.yml
+-bash: vim: command not found
+docker@minikube:~$ exit 
+logout
+ssh: Process exited with status 127
+ubuntu@ip-172-31-0-126:~$ vim deployment.yml
+ubuntu@ip-172-31-0-126:~$ kubectl create -f deployment.yml
+deployment.apps/nginx-deployment created
+ubuntu@ip-172-31-0-126:~$ kubectl get deployment 
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   1/1     1            1           9s
+ubuntu@ip-172-31-0-126:~$ kubectl get pod
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-2kvmq   1/1     Running   0          16s
+ubuntu@ip-172-31-0-126:~$ kubectl get deploy 
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   1/1     1            1           55s
+ubuntu@ip-172-31-0-126:~$ kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-86dcfdf4c6   1         1         1       63s
+ubuntu@ip-172-31-0-126:~$ kubectl get pods - w
+Error from server (NotFound): pods "-" not found
+Error from server (NotFound): pods "w" not found
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-2kvmq   1/1     Running   0          3m30s
+^Cubuntu@ip-172-31-0-126:~kubectl delete pod nginx-deployment-86dcfdf4c6-2kvmqmq
+pod "nginx-deployment-86dcfdf4c6-2kvmq" deleted
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-45hl8   1/1     Running   0          3s
+
+^Cubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-2kvmq
+Error from server (NotFound): pods "nginx-deployment-86dcfdf4c6-2kvmq" not found
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-45hl8   1/1     Running   0          25s
+^Cubuntu@ip-172-31-0-126:~$ 
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-45hl8
+pod "nginx-deployment-86dcfdf4c6-45hl8" deleted
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-str88   1/1     Running   0          4s
+^[[A^[[A^[[B^Cubuntu@ip-172-31-0-126:~$ 
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-45hl8
+Error from server (NotFound): pods "nginx-deployment-86dcfdf4c6-45hl8" not found
+ubuntu@ip-172-31-0-126:~$ vim deployment.yml
+ubuntu@ip-172-31-0-126:~$ kubectl apply -f deploymen.yml
+error: the path "deploymen.yml" does not exist
+ubuntu@ip-172-31-0-126:~$ kubectl apply -f deployment.yml
+Warning: resource deployments/nginx-deployment is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+deployment.apps/nginx-deployment configured
+ubuntu@ip-172-31-0-126:~$ vim deployment.yml
+ubuntu@ip-172-31-0-126:~$ kubecl get pods
+Command 'kubecl' not found, did you mean:
+  command 'kubectl' from snap kubectl (1.29.3)
+See 'snap info <snapname>' for additional versions.
+ubuntu@ip-172-31-0-126:~$ kubectl get pod
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-c7w8q   1/1     Running   0          51s
+nginx-deployment-86dcfdf4c6-cf2nl   1/1     Running   0          51s
+nginx-deployment-86dcfdf4c6-str88   1/1     Running   0          2m39s
+ubuntu@ip-172-31-0-126:~$ vi deployment.yml
+ubuntu@ip-172-31-0-126:~$ kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-86dcfdf4c6   3         3         3       8m6s
+ubuntu@ip-172-31-0-126:~$ kubectl get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           8m19s
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-str88
+pod "nginx-deployment-86dcfdf4c6-str88" deleted
+ubuntu@ip-172-31-0-126:~$ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-c7w8q   1/1     Running   0          2m23s
+nginx-deployment-86dcfdf4c6-cf2nl   1/1     Running   0          2m23s
+nginx-deployment-86dcfdf4c6-zkpm7   1/1     Running   0          7s
+ubuntu@ip-172-31-0-126:~$ kubectl delete nginx-deployment-86dcfdf4c6-cf2nl
+error: the server doesn't have a resource type "nginx-deployment-86dcfdf4c6-cf2nl"
+ubuntu@ip-172-31-0-126:~$ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-c7w8q   1/1     Running   0          3m19s
+nginx-deployment-86dcfdf4c6-cf2nl   1/1     Running   0          3m19s
+nginx-deployment-86dcfdf4c6-zkpm7   1/1     Running   0          63s
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-cf2nl
+pod "nginx-deployment-86dcfdf4c6-cf2nl" deleted
+ubuntu@ip-172-31-0-126:~$ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-c7w8q   1/1     Running   0          3m36s
+nginx-deployment-86dcfdf4c6-qvf8j   1/1     Running   0          2s
+nginx-deployment-86dcfdf4c6-zkpm7   1/1     Running   0          80s
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-c7w8q   1/1     Running   0          3m52s
+nginx-deployment-86dcfdf4c6-qvf8j   1/1     Running   0          18s
+nginx-deployment-86dcfdf4c6-zkpm7   1/1     Running   0          96s
+
+^Cubuntu@ip-172-31-0-126:~$ 
+ubuntu@ip-172-31-0-126:~$ kubectl delete pod nginx-deployment-86dcfdf4c6-c7w8q 
+pod "nginx-deployment-86dcfdf4c6-c7w8q" deleted
+ubuntu@ip-172-31-0-126:~$ kubectl get pods -w
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-86dcfdf4c6-g648p   1/1     Running   0          3s
+nginx-deployment-86dcfdf4c6-qvf8j   1/1     Running   0          49s
+nginx-deployment-86dcfdf4c6-zkpm7   1/1     Running   0          2m7s
