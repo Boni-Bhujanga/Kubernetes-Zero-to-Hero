@@ -1,3 +1,209 @@
+ubuntu@ip-172-31-0-126:~$ history
+    1  ls
+    2  sudo apt update
+    3  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    4  kubectl version --client
+    5  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    6  sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+    7  minikube start
+    8  # Add Docker's official GPG key:
+    9  sudo apt-get update
+   10  sudo apt-get install ca-certificates curl
+   11  sudo install -m 0755 -d /etc/apt/keyrings
+   12  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   13  sudo chmod a+r /etc/apt/keyrings/docker.asc
+   14  # Add the repository to Apt sources:
+   15  echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+   16    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   17  sudo apt-get update
+   18  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   19  sudo docker run hello-world
+   20  minikube start
+   21  sudo usermod -aG docker ubuntu
+   22  minikube start
+   23  exit
+   24  minikube start
+   25  kubectl get nodes
+   26  vi pod.yml
+   27  kubuctl create -f pod.yml
+   28  kubectl create -f pod.yml
+   29  kubectl get pods -o wide
+   30  minikube ssh
+   31  kubectl get pods
+   32  kubectl get pods
+   33  minikube ssh
+   34  minikube start
+   35  kubectl get pods -o wide
+   36  kubectl get pods
+   37  kubectl get deploy
+   38  kubectl get all
+   39  curl This is for people who don't understand "Replica Set":
+   40  -> In k8s, there is a concept called controllers (we saw this in architecture video). The main work of controller is to watching the POD is running in desired state or not.
+   41  -> If not it sends the message to scheduler to create a new resource to achieve the desired state.
+   42  -> One of the controller is called "Deployment".
+   43  ->  "Deployment" first creates "replica set(actual controller)" managed by "deployment" and replica set creates and manages the POD.
+   44  ->  Still confusing see the bellow picture:
+   45          +-----------------------------+
+   46          |      Deployment       |
+   47          | (desired state: 3)   |
+   48          +-----------------------------+
+   49                       |
+   50                       | creates or updates
+   51                       |
+   52          +----------------------------+
+   53          |      ReplicaSet        |
+   54          | (desired state: 3)  |
+   55          +----------------------------+
+   56                       |
+   57                       | creates or updates
+   58                       |
+   59          +----------------------+
+   60          |         Pod          |  (POD -> execution environment for the containers)
+   61          +----------------------+
+   62                       |
+   63                       | runs the containers
+   64                       |
+   65          +----------------------+
+   66          |       Container  |
+   67          +----------------------+
+   68  vi pod.yml
+   69  kubectl apply -f pod.yml
+   70  minikube start
+   71  kubectl get nodes
+   72  kubectl apply -f pod.yml
+   73  kubectl get pods -o wide
+   74  minikube ssh
+   75  kubectl get pods
+   76  kubectl delete pod nginx
+   77  minikube ssh
+   78  vim deployment.yml
+   79  kubectl create -f deployment.yml
+   80  kubectl get deployment
+   81  kubectl get pod
+   82  kubectl get deploy
+   83  kubectl get rs
+   84  kubectl get pods - w
+   85  kubectl get pods -w
+   86  kubectl delete pod nginx-deployment-86dcfdf4c6-2kvmq
+   87  kubectl get pods -w
+   88  kubectl delete pod nginx-deployment-86dcfdf4c6-2kvmq
+   89  kubectl get pods -w
+   90  kubectl delete pod nginx-deployment-86dcfdf4c6-45hl8
+   91  kubectl get pods -w
+   92  kubectl delete pod nginx-deployment-86dcfdf4c6-45hl8
+   93  vim deployment.yml
+   94  kubectl apply -f deploymen.yml
+   95  kubectl apply -f deployment.yml
+   96  vim deployment.yml
+   97  kubecl get pods
+   98  kubectl get pod
+   99  vi deployment.yml
+  100  kubectl get rs
+  101  kubectl get deploy
+  102  kubectl delete pod nginx-deployment-86dcfdf4c6-str88
+  103  kubectl get pods
+  104  kubectl delete nginx-deployment-86dcfdf4c6-cf2nl
+  105  kubectl get pods
+  106  kubectl delete pod nginx-deployment-86dcfdf4c6-cf2nl
+  107  kubectl get pods
+  108  kubectl get pods -w
+  109  kubectl delete pod nginx-deployment-86dcfdf4c6-c7w8q
+  110  kubectl get pods -w
+  111  vim deployment.yml
+  112  kubecl get pods
+  113  minikube start
+  114  kubectl get pods -w
+  115  kubectl delete pod nginx-deployment-86dcfdf4c6-g648p
+  116  kubectl get pods -w
+  117  kubectl get pods
+  118  minikube status
+  119  ls
+  120  git clone https://github.com/Boni-Bhujanga/Docker-Zero-to-Hero.git
+  121  ls
+  122  cd Docker-Zero-to-Hero
+  123  ls
+  124  cd examples
+  125  ls
+  126  cd python-web-app/
+  127  ls
+  128  vi Dockerfile
+  129  docket build -t bonibhujanga/python-sample-application-demo:v1 .
+  130  sudo apt update
+  131  sudo apt install docker.io -y
+  132  sudo usermod -aG docker ubuntu
+  133  exit
+  134  docker run hello-world
+  135  docker login
+  136  docket build -t bonibhujanga/python-sample-application-demo:v1 .
+  137  ls
+  138  cd Docker-Zero-to-Hero
+  139  cd examples
+  140  cd python-web-app/
+  141  ls
+  142  docker build -t bonibhujanga/python-sample-app-demo:v1 .
+  143  ls
+  144  vim deployment.yml
+  145  docker get image
+  146  docker image
+  147  vim deployment.yml
+  148  kubectl apply -f deployment.yml
+  149  vim deployment.yml
+  150  kubectl apply -f deployment.yml
+  151  vim deployment.yml
+  152  kubectl apply -f deployment.yml
+  153  vim deployment.yml
+  154  kubectl apply -f deployment.yml
+  155  vim dockerfile
+  156  ls
+  157  vi Dockerfile
+  158  vim deployment.yml
+  159  kubectl apply -f deployment.yml
+  160  vi Dockerfile
+  161  vim deployment.yml
+  162  kubectl apply -f deployment.yml
+  163  Client Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.20.2",
+  164  vim deployment.yml
+  165  kubectl apply -f deployment.yml
+  166  vim deployment.yml
+  167  kubectl apply -f deployment.yml
+  168  vim deployment.yml
+  169  sudo apt-get update && sudo apt-get install yamllint -y
+  170  kubectl apply -f deployment.yml
+  171  vim deployment.yml
+  172  ls
+  173  cd Docker-Zero-to-Hero
+  174  cd examples
+  175  cd python-web-app/
+  176  ls
+  177  rm dockerfile
+  178  ls
+  179  vi deployment.yml
+  180  kubectl apply -f deployment.yml
+  181  vi deployment.yml
+  182  kubectl apply -f --validate=false deployment.yml
+  183  docker imge
+  184  docker image
+  185  docker ps -a
+  186  docker build -t bonibhujanga/python-sample-app-demo:v1 .
+  187  vi deployment.yml
+  188  docker ps -a
+  189  kubectl apply -f deployment.yml
+  190  kubectl apply -f --validate=false deployment.yml
+  191  kubectl apply -h
+  192  kubectl apply -f deployment.yml --validate=false
+  193  vi deployment.yml
+  194  cd Docker-Zero-to-Hero
+  195  cd examples
+  196  cd python-web-app/
+  197  ls
+  198  kubectl apply -f deployment.yml
+  199  ls
+  200  history
+
+
+
+
+
 Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1014-aws x86_64)
 
  * Documentation:  https://help.ubuntu.com
